@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Proxy</title>
+  <style>
+    body {
+      background: #0f0f0f;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+    .box {
+      text-align: center;
+    }
+    h1 {
+      color: white;
+      margin-bottom: 20px;
+    }
+    input {
+      width: 400px;
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      font-size: 16px;
+    }
+    button {
+      padding: 12px 24px;
+      background: #5865f2;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-left: 8px;
+    }
+    button:hover {
+      background: #4752c4;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>My Proxy</h1>
+    <input type="text" id="url" placeholder="Enter a URL like google.com" />
+    <button onclick="go()">Go</button>
+  </div>
+
+  <script>
+    const BARE_SERVER = 'https://epoxy-tls.mrmonky764.workers.dev/';
+
+    function go() {
+      let url = document.getElementById('url').value;
+      if (!url.startsWith('http')) url = 'https://' + url;
+      // redirect through your bare server
+      window.location.href = BARE_SERVER + '?url=' + encodeURIComponent(url);
+    }
+
+    // allow pressing Enter
+    document.getElementById('url').addEventListener('keydown', e => {
+      if (e.key === 'Enter') go();
+    });
+  </script>
+</body>
+</html>
